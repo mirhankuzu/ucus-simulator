@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Uçuş Simülatörü</title>
+
+  <script src="https://cesium.com/downloads/cesiumjs/releases/1.111/Build/Cesium/Cesium.js"></script>
+  <link href="https://cesium.com/downloads/cesiumjs/releases/1.111/Build/Cesium/Widgets/widgets.css" rel="stylesheet" />
+
+  <style>
+    html, body, #cesiumContainer {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    #info {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(0,0,0,0.6);
+      color: white;
+      padding: 10px;
+      font-family: Arial;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+
+<div id="info">
+  W/S: İleri - Geri<br>
+  A/D: Sağa - Sola<br>
+  Q/E: Yüksel - Alçal
+</div>
+
+<div id="cesiumContainer"></div>
+<script src="script.js"></script>
+
+</body>
+</html>
