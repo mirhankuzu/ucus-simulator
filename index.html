@@ -1,12 +1,12 @@
-
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <title>Uçuş Simülatörü</title>
+  <meta charset="UTF-8">
+  <title>3D Uçuş Simülatörü</title>
 
-  <script src="https://cesium.com/downloads/cesiumjs/releases/1.111/Build/Cesium/Cesium.js"></script>
-  <link href="https://cesium.com/downloads/cesiumjs/releases/1.111/Build/Cesium/Widgets/widgets.css" rel="stylesheet" />
+  <!-- Cesium -->
+  <script src="https://cesium.com/downloads/cesiumjs/releases/1.114/Build/Cesium/Cesium.js"></script>
+  <link href="https://cesium.com/downloads/cesiumjs/releases/1.114/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
 
   <style>
     html, body, #cesiumContainer {
@@ -16,6 +16,7 @@
       padding: 0;
       overflow: hidden;
     }
+
     #info {
       position: absolute;
       top: 10px;
@@ -23,21 +24,23 @@
       background: rgba(0,0,0,0.6);
       color: white;
       padding: 10px;
-      font-family: Arial;
       z-index: 10;
+      font-family: Arial;
     }
   </style>
 </head>
+
 <body>
 
 <div id="info">
-  W/S: İleri - Geri<br>
-  A/D: Sağa - Sola<br>
-  Q/E: Yüksel - Alçal
+W/S: İleri - Geri<br>
+A/D: Sağa - Sola<br>
+Q/E: Yüksel - Alçal
 </div>
 
 <div id="cesiumContainer"></div>
-<script src="script.js"></script>
 
+<script src="script.js"></script>
 </body>
 </html>
+
