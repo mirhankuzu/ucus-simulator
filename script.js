@@ -1,38 +1,49 @@
+// 🔑 Cesium Token
+Cesium.Ion.defaultAccessToken = "BURAYA_TOKEN_YAPISTIR";
 
+// 🌍 Viewer
 const viewer = new Cesium.Viewer("cesiumContainer", {
-  terrainProvider: Cesium.createWorldTerrain(),
+  terrain: Cesium.Terrain.fromWorldTerrain(),
   shouldAnimate: true
 });
 
-let position = Cesium.Cartesian3.fromDegrees(36.9, 37.1, 2000);
+// ✈️ Başlangıç konumu (Türkiye üstü)
+let position = Cesium.Cartesian3.fromDegrees(35, 39, 3000);
+let heading = 0;
+let pitch = 0;
+let roll = 0;
 
-const plane = viewer.entities.add({
+// ✈️ Uçak entity
+const airplane = viewer.entities.add({
   position: position,
   model: {
-    uri: "https://cesium.com/downloads/cesiumjs/releases/1.111/Apps/SampleData/models/CesiumAir/Cesium_Air.glb",
-    minimumPixelSize: 80
+    uri: "https://cdn.jsdelivr.net/gh/CesiumGS/cesium@main/Apps/SampleData/models/CesiumAir/Cesium_Air.glb",
+    minimumPixelSize: 128,
+    maximumScale: 200
   }
 });
 
-viewer.trackedEntity = plane;
+// 🎥 Kamera uçağı takip etsin
+viewer.trackedEntity = airplane;
 
-let speed = 0.0003;
+// 🎮 Kontroller
+document.addEventListener("keydown", (e) => {
+  const speed = 50;
 
-window.addEventListener("keydown", (e) => {
-  let carto = Cesium.Cartographic.fromCartesian(position);
+  if (e.key === "w") pitch += 0.02;
+  if (e.key === "s") pitch -= 0.02;
+  if (e.key === "a") heading += 0.03;
+  if (e.key === "d") heading -= 0.03;
+  if (e.key === "q") position = Cesium.Cartesian3.add(position, new Cesium.Cartesian3(0, 0, 100), new Cesium.Cartesian3());
+  if (e.key === "e") position = Cesium.Cartesian3.add(position, new Cesium.Cartesian3(0, 0, -100), new Cesium.Cartesian3());
 
-  if (e.key === "w") carto.latitude += speed;
-  if (e.key === "s") carto.latitude -= speed;
-  if (e.key === "a") carto.longitude -= speed;
-  if (e.key === "d") carto.longitude += speed;
-  if (e.key === "q") carto.height += 200;
-  if (e.key === "e") carto.height -= 200;
-
-  position = Cesium.Cartesian3.fromRadians(
-    carto.longitude,
-    carto.latitude,
-    carto.height
+  const orientation = Cesium.Transforms.headingPitchRollQuaternion(
+    position,
+    new Cesium.HeadingPitchRoll(heading, pitch, roll)
   );
 
-  plane.position = position;
+  airplane.position = position;
+  airplane.orientation = orientation;
 });
+
+
